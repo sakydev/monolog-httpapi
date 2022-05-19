@@ -1,0 +1,27 @@
+{
+    "name": "sakydev/monolog-httpapi",
+    "description": "A handler for Monolog that sends messages to external API",
+        "keywords": ["monolog-httpapi","log", "logging", "monolog", "http", "channels","bots"],
+        "homepage": "https://github.com/sakydev/monolog-httpapi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saqib Razzaq",
+            "email": "saqibrzzaq@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "sakydev\\monolog-httpapi\\": "src"
+        }
+    },
+    "require": {
+        "monolog/monolog": "~1",
+        "php": ">=7.0 || >=8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "rmccue/requests": "^2.0"
+    }
+
+}
