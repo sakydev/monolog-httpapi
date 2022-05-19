@@ -23,10 +23,10 @@ Now Simply use it like this :
 ```php
 require 'vendor/autoload.php';
 use Monolog\Logger;
-use sakydev\HttpApiHander\HttpApiHander;
-$log = new Logger('HttpApiHander');
+use sakydev\HttpApiHandler\HttpApiHandler;
+$log = new Logger('HttpApiHandler');
 $headers = ['Content-Type: application/json'];
-$log->pushHandler(new HttpApiHander('http://url-here.com', $headers));
+$log->pushHandler(new HttpApiHandler('http://url-here.com', $headers));
 
 
 $log->notice('hello world !');

@@ -6,6 +6,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use WpOrg\Requests\Requests;
+use Monolog\LogRecord;
 
 /**
  * HTTP API Handler For Monolog
@@ -15,7 +16,7 @@ use WpOrg\Requests\Requests;
  * @author Saqib Razzaq <saqibrzzaq@gmail.com>
  */
 
-class HttpApiLoggingHandler extends AbstractProcessingHandler
+class HttpApiHandler extends AbstractProcessingHandler
 {
     public function __construct($apiUrl, $headers = ['Content-Type: application/json']) {
         // Requests will be sent to apiUrl/{loglevel}/{channel}
@@ -28,7 +29,7 @@ class HttpApiLoggingHandler extends AbstractProcessingHandler
      * @param $record[] log data
      * @return void
      */
-    public function write(array $record): void
+    public function write(LogRecord $record): void
     {
         // If your api wants output data as a string, uncomment below lines
 
@@ -37,7 +38,7 @@ class HttpApiLoggingHandler extends AbstractProcessingHandler
 
         // If you are sending to Kibana or something similar, it is better to send data as
         // object so it is decodeable and makes more sense
-        $message = ['message' => $record['message'], 'extra' => $extra];
+        $message = ['message' => $record['message'], 'extra' => $record['extra']];
         $this->send($record['level_name'], array_merge($message, $record['context']));
     }
 
