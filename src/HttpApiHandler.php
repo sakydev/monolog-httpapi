@@ -29,7 +29,7 @@ class HttpApiHandler extends AbstractProcessingHandler
      * @param $record[] log data
      * @return void
      */
-    public function write(LogRecord $record): void
+    public function write(array $record): void
     {
         // If your api wants output data as a string, uncomment below lines
 
