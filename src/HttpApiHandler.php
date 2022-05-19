@@ -18,9 +18,10 @@ use Monolog\LogRecord;
 
 class HttpApiHandler extends AbstractProcessingHandler
 {
-    public function __construct($apiUrl, $headers = ['Content-Type: application/json']) {
+    public function __construct($apiUrl, $channel, $headers = ['Content-Type: application/json']) {
         // Requests will be sent to apiUrl/{loglevel}/{channel}
         $this->apiUrl = $apiUrl;
+        $this->channel = $channel;
         $this->headers = $headers;
     }
 
@@ -39,7 +40,7 @@ class HttpApiHandler extends AbstractProcessingHandler
         // If you are sending to Kibana or something similar, it is better to send data as
         // object so it is decodeable and makes more sense
         $message = ['message' => $record['message'], 'extra' => $record['extra']];
-        $this->send($record['level_name'], array_merge($message, $record['context']));
+        $this->send($record['level_name'], array_merge($message, $record['context']), $this->channel);
     }
 
     /**

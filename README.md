@@ -25,8 +25,9 @@ require 'vendor/autoload.php';
 use Monolog\Logger;
 use sakydev\HttpApiHandler\HttpApiHandler;
 $log = new Logger('HttpApiHandler');
+$channel = 'default-channel';
 $headers = ['Content-Type: application/json'];
-$log->pushHandler(new HttpApiHandler('http://url-here.com', $headers));
+$log->pushHandler(new HttpApiHandler('http://url-here.com', $channel, $headers));
 
 
 $log->notice('hello world !');
