@@ -18,11 +18,13 @@ use Monolog\LogRecord;
 
 class HttpApiHandler extends AbstractProcessingHandler
 {
-    public function __construct($apiUrl, $channel, $headers = ['Content-Type: application/json']) {
+    public function __construct($apiUrl, $channel, $headers = [], $level = Logger::DEBUG, $bubble = true) {
+        parent::__construct($level, $bubble);
         // Requests will be sent to apiUrl/{loglevel}/{channel}
         $this->apiUrl = $apiUrl;
         $this->channel = $channel;
         $this->headers = $headers;
+
     }
 
     /**
