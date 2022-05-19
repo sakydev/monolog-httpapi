@@ -41,6 +41,7 @@ class HttpApiHandler extends AbstractProcessingHandler
 
         // If you are sending to Kibana or something similar, it is better to send data as
         // object so it is decodeable and makes more sense
+        $record['context']['client_ip'] = $this->getClientIp();
         $message = ['message' => $record['message'], 'extra' => $record['extra']];
         $this->send($record['level_name'], array_merge($message, $record['context']), $this->channel);
     }
@@ -63,5 +64,18 @@ class HttpApiHandler extends AbstractProcessingHandler
         } catch (Exception $e) {
             // do what you will with error
         }
+    }
+
+    public function getClientIp() : string {
+        $fields = ['HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'];
+        $ip = '';
+
+        foreach ($fields as $field) {
+            if (isset($_SERVER[$field])) {
+                return $_SERVER[$field];
+            }
+        }
+
+        return $ip;
     }
 }
