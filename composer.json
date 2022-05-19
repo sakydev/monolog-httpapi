@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "sakydev\\HttpApiHander\\": "src"
+            "sakydev\\HttpApiHandler\\": "src"
         }
     },
     "require": {
